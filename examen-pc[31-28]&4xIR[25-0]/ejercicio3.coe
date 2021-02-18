@@ -1,0 +1,39 @@
+; Sample memory initialization file for Single Port Block Memory, 
+; v3.0 or later.
+;
+; This .COE file specifies initialization values for a block 
+; memory of depth=512, and width=32. In this case, values are 
+; specified in hexadecimal format.
+;                                                                          ADDR
+; 00631816,       xor R3, R3, R3 (mv R3, #0) Resultado      0x00000000	000000 00011 00011 00011 00000 010110
+; 00842016,       xor R4, R4, R4 (mv R4, #0) Tener un cero  0x00000004	000000 00100 00100 00100 00000 010110
+; 8C80002C,       lw R0, 44(R4)  (lw A, R0)                 0x00000008	100011 00100 00000 00000 00000 101100
+; 8C810030,       lw R1, 48(R4)  (lw B, R1)                 0x0000000C	100011 00100 00001 00000 00000 110000
+; 8C820034,       lw R2, 52(R4)  (lw UNO, R2)               0x00000010	100011 00100 00010 00000 00000 110100
+; FC240003, WHILE:beq R1, R4, FIN                           0x00000014	111111 00001 00100 00000 00000 000011
+; 00601820,       add R3, R3, R0                            0x00000018	000000 00011 00000 00011 00000 100000
+; 00220822,       sub R1, R1, R2                            0x0000001C	000000 00001 00010 00001 00000 100010
+; 10000005,       j WHILE                                   0x00000020	000100 00000 00000 00000 00000 000101
+; AC830038, FIN:  sw R3, 56(R4)  (sw R3, C)                 0x00000024	101011 00100 00011 00000 00000 111000
+; 1000000A, FINAL:j FINAL                                   0x00000028	000100 00000 00000 00000 00000 001010
+; 00000008,       VALOR A                                   0x0000002C	0x00000008
+; 00000003,       VALOR B                                   0x00000030	0x00000003
+; 00000001;       VALOR UNO                                 0x00000034	0x00000001
+;                 VALOR C = A*B                             0x00000038
+;
+memory_initialization_radix=16;
+memory_initialization_vector=
+00631816,
+00842016,
+8C80002C,
+8C810030,
+8C820034,
+FC240003,
+00601820,
+00220822,
+10000005,
+AC830038,
+1000000A,
+00000008,
+00000003,
+00000001;
